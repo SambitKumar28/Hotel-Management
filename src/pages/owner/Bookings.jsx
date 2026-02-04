@@ -1,8 +1,8 @@
 import React from 'react'
-import {bookingData} from "../assets/assets.js"
+import {bookingData} from "../../assets/assets"
 import { MapPin,Calendar, Users, CreditCard, CheckCircle,Clock, XCircle, Eye, Trash2, } from 'lucide-react'
 import { div } from 'motion/react-client'
-const MyBooking = () => {
+const Bookings = () => {
   const getStatusColor=(status)=>{
       switch(status){
         case"confirmed":
@@ -177,4 +177,4 @@ const MyBooking = () => {
   )
 }
 
-export default MyBooking
+export default Bookings

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {AppContext} from "../context/AppContext.jsx"
 const Navbar = () => {
 
-       const {navigate} = useContext(AppContext);
+       const {navigate, user, setUser} = useContext(AppContext);
 
     const navLinks = [
         { name: 'Home', path: '/' },
@@ -17,6 +17,11 @@ const Navbar = () => {
 
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+    const logout=async()=>{
+        setUser(flase);
+       
+    }
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -51,10 +56,31 @@ const Navbar = () => {
                 </div>
 
                 {/* Desktop Right */}
-                <div className="hidden md:flex items-center gap-4">     
-                    <button onClick={()=>navigate("/login")} className={`px-8 py-2.5 rounded-full ml-4 transition-all duration-500 ${isScrolled ? "text-white bg-black" : "bg-white text-black cursor-pointer"}` }>
-                        Login
-                    </button>
+                <div className="hidden md:flex items-center gap-4">  
+
+                    {
+                        user?(
+                            <div className='relative group inline-block'>
+                               <img src={assets.profile_icon}  alt="" className='w-12 h-12 rounded-full cursor-pointer' />
+                               <div className='absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 group-hover:visible invisible transition duration-300 z-50'>
+                                <ul className='py-2'>
+                                    <li>
+                                        <Link to={"/my-booking"} className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-10 '>My Booking</Link>
+                                    </li>
+                                    <li  onClick={logout}>
+                                        <Link className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-10 '>Log Out</Link>
+                                    </li>
+                                </ul>
+                               </div>
+                            </div>
+                        ):(
+                           <button onClick={()=>navigate("/login")} className={`px-8 py-2.5 rounded-full ml-4 transition-all duration-500 ${isScrolled ? "text-white bg-black" : "bg-white text-black cursor-pointer"}` }>
+                            Login
+                          </button>
+                        )
+                    }
+
+                   
                 </div>
 
                 {/* Mobile Menu Button */}
